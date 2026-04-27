@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const ApplicationForm = ({ onSubmit, initialData = null, onCancel = null }) => {
+const ApplicationForm = ({ onSubmit, initialData = null, onCancel = null, refreshKey = 0 }) => {
   const [formData, setFormData] = useState({
     companyId: '',
     position: '',
@@ -40,7 +40,7 @@ const ApplicationForm = ({ onSubmit, initialData = null, onCancel = null }) => {
       }
     };
     fetchCompanies();
-  }, []);
+  }, [refreshKey]);
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));

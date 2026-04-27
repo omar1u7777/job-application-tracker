@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import StatsCard from './components/StatsCard';
 import ApplicationList from './components/ApplicationList';
 import ApplicationForm from './components/ApplicationForm';
+import CompanyForm from './components/CompanyForm';
 
 function App() {
   const [editingApplication, setEditingApplication] = useState(null);
@@ -46,11 +47,14 @@ function App() {
 
       <StatsCard refreshKey={refreshKey} />
 
+      <CompanyForm onCompanyAdded={triggerRefresh} />
+
       {showForm ? (
         <ApplicationForm
           initialData={editingApplication}
           onSubmit={editingApplication ? handleUpdateApplication : handleAddApplication}
           onCancel={handleCancelEdit}
+          refreshKey={refreshKey}
         />
       ) : (
         <button className="btn btn-submit" onClick={() => setShowForm(true)}>
