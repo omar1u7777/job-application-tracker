@@ -42,6 +42,7 @@ const applicationSchema = new mongoose.Schema(
       validate: {
         validator: function (v) {
           if (!v) return true;
+          if (!this.dateApplied) return true;
           return v >= this.dateApplied;
         },
         message: 'Expected reply date must be after or equal to date applied'
