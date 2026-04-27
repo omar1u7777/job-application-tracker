@@ -13,12 +13,12 @@ router.route('/')
   .get(getAllApplications)
   .post(createApplication);
 
+router.route('/company/:companyId')
+  .get(getApplicationsByCompany);
+
 router.route('/:id')
   .get(getApplicationById)
   .put(updateApplication)
   .delete(deleteApplication);
-
-router.route('/company/:companyId')
-  .get(getApplicationsByCompany);
 
 module.exports = router;
