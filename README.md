@@ -16,7 +16,7 @@ Keeping track of multiple job applications, interview dates, and contact informa
 
 1. **Clone the repository**
    ```bash
-   git clone <repo-url>
+   git clone https://github.com/omar1u7777/job-application-tracker.git
    cd job-tracker
    ```
 
@@ -91,6 +91,7 @@ job-tracker/
 │       └── components/
 │           ├── ApplicationForm.jsx
 │           ├── ApplicationList.jsx
+│           ├── CompanyForm.jsx
 │           └── StatsCard.jsx
 └── package.json
 ```
