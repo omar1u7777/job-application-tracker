@@ -126,25 +126,33 @@ const ApplicationList = ({ onEdit, onDelete }) => {
           </tr>
         </thead>
         <tbody>
-          {filteredAndSorted.map(app => (
-            <tr key={app._id}>
-              <td>{app.companyId?.name || 'N/A'}</td>
-              <td>{app.position}</td>
-              <td>{app.salaryRange}</td>
-              <td>
-                <span className={`badge badge-${app.status}`}>{app.status}</span>
-              </td>
-              <td>{new Date(app.dateApplied).toLocaleDateString()}</td>
-              <td>
-                <button className="btn btn-small btn-edit" onClick={() => onEdit(app)}>
-                  Edit
-                </button>
-                <button className="btn btn-small btn-delete" onClick={() => handleDelete(app._id)}>
-                  Delete
-                </button>
+          {filteredAndSorted.length === 0 ? (
+            <tr>
+              <td colSpan="6" style={{ textAlign: 'center', color: '#94a3b8', padding: '2rem' }}>
+                No applications found.
               </td>
             </tr>
-          ))}
+          ) : (
+            filteredAndSorted.map(app => (
+              <tr key={app._id}>
+                <td>{app.companyId?.name || 'N/A'}</td>
+                <td>{app.position}</td>
+                <td>{app.salaryRange}</td>
+                <td>
+                  <span className={`badge badge-${app.status}`}>{app.status}</span>
+                </td>
+                <td>{new Date(app.dateApplied).toLocaleDateString()}</td>
+                <td>
+                  <button className="btn btn-small btn-edit" onClick={() => onEdit(app)}>
+                    Edit
+                  </button>
+                  <button className="btn btn-small btn-delete" onClick={() => handleDelete(app._id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
