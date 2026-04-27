@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const Company = require('../models/Company');
 const Application = require('../models/Application');
 const Contact = require('../models/Contact');
+
+dotenv.config({ path: require('path').resolve(__dirname, '../.env') });
 
 const seedDatabase = async () => {
   try {
