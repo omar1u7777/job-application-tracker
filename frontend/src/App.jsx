@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import StatsCard from './components/StatsCard';
 import ApplicationList from './components/ApplicationList';
 import ApplicationForm from './components/ApplicationForm';
@@ -6,10 +6,15 @@ import ApplicationForm from './components/ApplicationForm';
 function App() {
   const [editingApplication, setEditingApplication] = useState(null);
   const [showForm, setShowForm] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const triggerRefresh = useCallback(() => {
+    setRefreshKey(prev => prev + 1);
+  }, []);
 
   const handleAddApplication = (newApp) => {
     setShowForm(false);
-    window.location.reload();
+    triggerRefresh();
   };
 
   const handleEditApplication = (app) => {
@@ -20,11 +25,11 @@ function App() {
   const handleUpdateApplication = (updatedApp) => {
     setEditingApplication(null);
     setShowForm(false);
-    window.location.reload();
+    triggerRefresh();
   };
 
   const handleDeleteApplication = (id) => {
-    // ApplicationList handles the actual delete
+    triggerRefresh();
   };
 
   const handleCancelEdit = () => {
@@ -39,7 +44,7 @@ function App() {
         <p>Track your job applications in one place</p>
       </div>
 
-      <StatsCard />
+      <StatsCard refreshKey={refreshKey} />
 
       {showForm ? (
         <ApplicationForm
@@ -54,6 +59,7 @@ function App() {
       )}
 
       <ApplicationList
+        key={refreshKey}
         onEdit={handleEditApplication}
         onDelete={handleDeleteApplication}
       />

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const StatsCard = () => {
+const StatsCard = ({ refreshKey = 0 }) => {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -26,7 +26,7 @@ const StatsCard = () => {
     fetchStats();
     const interval = setInterval(fetchStats, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [refreshKey]);
 
   if (loading) return <div className="loading">Loading stats...</div>;
   if (error) return <div className="error">{error}</div>;
